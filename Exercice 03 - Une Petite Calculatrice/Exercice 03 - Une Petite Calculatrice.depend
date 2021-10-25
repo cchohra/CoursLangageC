@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1626534019 source:c:\users\chohr\desktop\apprendre programmation c\exercice 03 - une petite calculatrice\main.c
+	<stdio.h>
+	<stdlib.h>
+

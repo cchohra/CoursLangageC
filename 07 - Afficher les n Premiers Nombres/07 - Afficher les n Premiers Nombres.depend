@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1626529104 source:c:\users\chohr\desktop\apprendre programmation c\07 - afficher les n premiers nombres\main.c
+	<stdio.h>
+	<stdlib.h>
+

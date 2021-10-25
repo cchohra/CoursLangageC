@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1626536139 source:c:\users\chohr\desktop\apprendre programmation c\exercice 04 - examen de mathématiques\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

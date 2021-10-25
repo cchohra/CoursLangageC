@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1626352632 source:c:\users\chohr\desktop\apprendre programmation c\signe d'un nombre\main.c
+	<stdio.h>
+	<stdlib.h>
+

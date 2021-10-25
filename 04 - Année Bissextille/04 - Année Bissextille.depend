@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1626353459 source:c:\users\chohr\desktop\apprendre programmation c\année bissextille\main.c
+	<stdio.h>
+	<stdlib.h>
+
