@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1631028852 source:c:\users\chohr\desktop\apprendre programmation c\exercice 05 - reconnaitre les nombres premiers\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
