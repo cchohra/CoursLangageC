@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1645351663 source:c:\users\chohr\desktop\apprendre programmation c\24 - lire des fichiers texte\main.c
+	<stdio.h>
+	<stdlib.h>
+

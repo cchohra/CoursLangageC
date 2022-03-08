@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1645387074 source:c:\users\chohr\desktop\apprendre programmation c\exercice 20 - un système d'authentification\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
