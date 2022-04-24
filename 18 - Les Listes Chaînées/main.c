@@ -17,10 +17,7 @@
           l'élément suivant est NULL.
 */
 
-typedef struct noeud noeud; // Pour que le type "noeud" soit reconnu par le type liste.
-
-typedef noeud *liste; // Une liste est un pointeur sur un noeud (très simplement)
-
+typedef struct noeud *liste; // Une liste est un pointeur sur un noeud (très simplement)
 typedef struct noeud { // Un noeud est une enregistrement qui contient :
     int val;           // Une valeur.
     liste suiv;        // Une liste (pointeur sur un autre noeud).

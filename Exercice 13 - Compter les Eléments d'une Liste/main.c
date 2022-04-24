@@ -10,9 +10,7 @@
         - Dire si les éléments de la liste sont triés (dans un ordre croissant).
 */
 
-typedef struct noeud noeud; // Pour que le type "noeud" soit reconnu par le type liste.
-
-typedef noeud *liste; // Une liste est un pointeur sur un noeud (très simplement)
+typedef struct noeud *liste; // Une liste est un pointeur sur un noeud (très simplement)
 
 typedef struct noeud { // Un noeud est une enregistrement qui contient :
     int val;           // Une valeur.

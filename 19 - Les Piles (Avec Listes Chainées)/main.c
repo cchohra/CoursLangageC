@@ -16,9 +16,7 @@
     les diffrentes fonctions dans le programme principal.
 */
 
-typedef struct noeud noeud;
-
-typedef noeud *pile;
+typedef struct noeud *pile;
 
 typedef struct noeud {
     int val;
