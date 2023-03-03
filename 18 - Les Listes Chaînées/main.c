@@ -122,27 +122,23 @@ liste insererPos(liste L, int v, int k) {
     else if (k == 1) { // L'insertion à la première position
         return insererTete(L, v);
     }
-    else {
-        liste p = malloc(sizeof(noeud));
-        p->val = v;
-        liste q = L;
-        int pos = 1; // La position du pointeur "q" dans la liste
-        while ((pos < k - 1) && (q != NULL)) { // Passer à la position "k - 1"
-            q = q->suiv;
-            pos = pos + 1;
-        }
-        if (q == NULL) { // Si la position d'insertion est supérieure à la taille de la liste + 1
-                         // alors il est impossible d'insérer l'élément
+	else {
+		liste q = L;
+		int pos = 1;
+		while ((pos < k - 1) && (q != NULL)) {
+			q = q->suivant;
+			pos = pos + 1;
+		}
+		if (q == NULL) {
             printf("Impossible d'inserer la valeur %d \n", v);
-            free(p);
-            return L;
-        }
-        // Insérer le neoud référencé par "p" entre les élément aux positions
-        // "k - 1" et "k" ("k + 1" après insertion)
-        p->suiv = q->suiv;
-        q->suiv = p;
-        return L;
-    }
+			return L;
+		}
+		liste p = malloc(sizeof(noeud));
+		p->valeur = v;
+		p->suivant = q->suivant;
+		q->suivant = p;
+		return L;
+	}
 }
 
 // Insertion à la position "k" (version récursive)
