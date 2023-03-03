@@ -2,124 +2,124 @@
 #include <stdlib.h>
 
 /*
-    Une collection de donnÈes ayant le mÍme type
-        - Oui c'est la mÍme dÈfinition que j'ai utilisÈe pour les tableaux.
-        - Mais l'organisation des donnÈes est plus flexible.
-        - Pas besoin de spÈcifier la taille de la liste ‡ l'avance.
-        - PossibilitÈ d'insÈrer ou supprimer les ÈlÈment
-          ‡ n'importe quelle position.
-        - Les noeuds de la liste sont reliÈs entre eux avec des pointeurs.
+    Une collection de donn√©es ayant le m√™me type
+        - Oui c'est la m√™me d√©finition que j'ai utilis√©e pour les tableaux.
+        - Mais l'organisation des donn√©es est plus flexible.
+        - Pas besoin de sp√©cifier la taille de la liste √† l'avance.
+        - Possibilit√© d'ins√©rer ou supprimer les √©l√©ment
+          √† n'importe quelle position.
+        - Les noeuds de la liste sont reli√©s entre eux avec des pointeurs.
         - Chaque noeud est une enregistrement qui contient :
-            * Les donnÈes (un ou plusieurs champs).
+            * Les donn√©es (un ou plusieurs champs).
             * Un pointeur sur le noeud suivant.
-        - Une liste est dÈfinie par l'adresse de (un pointeur sur) son premier noeud.
-        - On atteint la fin de la liste quand le pointeur (censÈ Ítre) sur
-          l'ÈlÈment suivant est NULL.
+        - Une liste est d√©finie par l'adresse de (un pointeur sur) son premier noeud.
+        - On atteint la fin de la liste quand le pointeur (cens√© √™tre) sur
+          l'√©l√©ment suivant est NULL.
 */
 
-typedef struct noeud *liste; // Une liste est un pointeur sur un noeud (trËs simplement)
+typedef struct noeud *liste; // Une liste est un pointeur sur un noeud (tr√®s simplement)
 typedef struct noeud { // Un noeud est une enregistrement qui contient :
     int val;           // Une valeur.
     liste suiv;        // Une liste (pointeur sur un autre noeud).
 } noeud;
 
-// Une fonction qui affiche tous les ÈlÈments d'une liste "L"
+// Une fonction qui affiche tous les √©l√©ments d'une liste "L"
 void afficher(liste L) {
-    liste p = L; // DÈfinir une liste (pointeur) qui rÈfÈrence le premier
+    liste p = L; // D√©finir une liste (pointeur) qui r√©f√©rence le premier
                  // noeud de "L"
-                 // Attention : il ne faut pas utiliser la tÍte de la liste
-                 // pour parcourir ses ÈlÈments, on ne peut parcourir la liste
+                 // Attention : il ne faut pas utiliser la t√™te de la liste
+                 // pour parcourir ses √©l√©ments, on ne peut parcourir la liste
                  // que dans un sens. Il serait possible dans certains cas
-                 // de perdre les ÈlÈments de la liste si vous dÈplacez la tÍte.
+                 // de perdre les √©l√©ments de la liste si vous d√©placez la t√™te.
     while (p != NULL) { // Tant qu'on n'a pas atteint la fin de la liste
-        printf("%d\n", p->val); // Officher l'ÈlÈment dans le noeud actuel.
-        p = p->suiv; // Donner ‡ "p" l'adresse du noeud suivant.
+        printf("%d\n", p->val); // Officher l'√©l√©ment dans le noeud actuel.
+        p = p->suiv; // Donner √† "p" l'adresse du noeud suivant.
                      // Si le noeud suivant n'existe pas, "p" va recevoir
                      // la valeur "NULL".
     }
 }
 
-// Une fonction qui affiche rÈcursivement les ÈlÈments d'une liste
-// - Cas ÈlÈmentaire : si la liste est vide (L == NULL) alors ne rien faire.
-// - Cas de rÈcurrence : sinon :
-//      1. Afficher le premier ÈlÈment.
-//      2. Appel rÈcursif avec le reste des ÈlÈments.
+// Une fonction qui affiche r√©cursivement les √©l√©ments d'une liste
+// - Cas √©l√©mentaire : si la liste est vide (L == NULL) alors ne rien faire.
+// - Cas de r√©currence : sinon :
+//      1. Afficher le premier √©l√©ment.
+//      2. Appel r√©cursif avec le reste des √©l√©ments.
 void afficherRec(liste L) {
     if (L != NULL) {
-        printf("%d\n", L->val); // Afficher le premier ÈlÈment.
-        afficherRec(L->suiv); // Appel rÈcursif avec le reste des ÈlÈments (L->suiv).
+        printf("%d\n", L->val); // Afficher le premier √©l√©ment.
+        afficherRec(L->suiv); // Appel r√©cursif avec le reste des √©l√©ments (L->suiv).
     }
 }
 
-// Une fonction qui affiche rÈcursivement les ÈlÈments d'une liste dans l'ordre inverse
-// - Cas ÈlÈmentaire : si la liste est vide (L == NULL) alors ne rien faire.
-// - Cas de rÈcurrence : sinon :
-//      1. Appel rÈcursif avec le reste des ÈlÈments.
-//      2. Lorsque tous les ÈlÈments suivants sont affichÈs, on affiche le premier ÈlÈment.
+// Une fonction qui affiche r√©cursivement les √©l√©ments d'une liste dans l'ordre inverse
+// - Cas √©l√©mentaire : si la liste est vide (L == NULL) alors ne rien faire.
+// - Cas de r√©currence : sinon :
+//      1. Appel r√©cursif avec le reste des √©l√©ments.
+//      2. Lorsque tous les √©l√©ments suivants sont affich√©s, on affiche le premier √©l√©ment.
 void afficherRecInverse(liste L) {
     if (L != NULL) {
         afficherRec(L->suiv);
-        printf("%d\n", L->val); // Afficher le premier ÈlÈment aprËs l'appel rÈcursif cette fois.
+        printf("%d\n", L->val); // Afficher le premier √©l√©ment apr√®s l'appel r√©cursif cette fois.
     }
 }
 
-// Insere l'ÈlÈment "v" ‡ la tÍte de la liste "L" et retourne le rÈsultat
+// Insere l'√©l√©ment "v" √† la t√™te de la liste "L" et retourne le r√©sultat
 liste insererTete(liste L, int v) {
-    liste p = malloc(sizeof(noeud)); // CrÈer un nouveau noeud
-    p->val = v;  // Donner la valeur "v" passÈe comme paramËtre
-    p->suiv = L; // Le suivant du nouveau noeud crÈÈ devient l'ancienne liste "L".
-                 // La liste "p" contient maintenant tout les ÈlÈments de "L"
-                 // avec l'ÈlÈment de "v" insÈrÈ avant.
+    liste p = malloc(sizeof(noeud)); // Cr√©er un nouveau noeud
+    p->val = v;  // Donner la valeur "v" pass√©e comme param√®tre
+    p->suiv = L; // Le suivant du nouveau noeud cr√©√© devient l'ancienne liste "L".
+                 // La liste "p" contient maintenant tout les √©l√©ments de "L"
+                 // avec l'√©l√©ment de "v" ins√©r√© avant.
     return p;    // Retourner "p" la nouvelle liste.
 }
 
-// Insere l'ÈlÈment "v" ‡ la fin de la liste "L" et retourne le rÈsultat
+// Insere l'√©l√©ment "v" √† la fin de la liste "L" et retourne le r√©sultat
 liste insererQueue(liste L, int v) {
     if (L == NULL) {
         // return insererTete(L, v);
-        // C'est la mÍme chose que l'insertion ‡ la tÍte de la liste
+        // C'est la m√™me chose que l'insertion √† la t√™te de la liste
         liste p = malloc(sizeof(noeud));
         p->val = v;
         p->suiv = NULL;
         return p;
     }
     else {
-        // CrÈer le noeud
+        // Cr√©er le noeud
         liste p = malloc(sizeof(noeud));
         p->val = v;
         p->suiv = NULL;
         liste q = L; // Utiliser "q" pour parcourir la liste
-        while (q->suiv != NULL) { // Jusqu'‡ ce que q->suiv == NULL
+        while (q->suiv != NULL) { // Jusqu'√† ce que q->suiv == NULL
             q = q->suiv;
         }
-        q->suiv = p; // Lier le noeud crÈÈ dans "p" ‡ la fin de la liste
+        q->suiv = p; // Lier le noeud cr√©√© dans "p" √† la fin de la liste
         return L;
     }
 }
 
-// Insertion ‡ la (version rÈcursive)
+// Insertion √† la (version r√©cursive)
 liste insererQueueRec(liste L, int v) {
     if (L == NULL) {
-        // Insertion ‡ la tÍte
+        // Insertion √† la t√™te
         liste p = malloc(sizeof(noeud));
         p->val = v;
         p->suiv = NULL;
         return p;
     }
     else {
-        // L'insertion ‡ la fin de la liste "L" revient ‡ l'insertion ‡ la fin de son "suiv"
+        // L'insertion √† la fin de la liste "L" revient √† l'insertion √† la fin de son "suiv"
         L->suiv = insererQueueRec(L->suiv, v);
         return L;
     }
 }
 
-// Insere l'ÈlÈment "v" ‡ la position "k" de la liste "L" et retourne le rÈsultat
+// Insere l'√©l√©ment "v" √† la position "k" de la liste "L" et retourne le r√©sultat
 liste insererPos(liste L, int v, int k) {
-    if (k < 1) { // Si la position donnÈe est infÈrieur ‡ 1, il est impossible d'insÈrer l'ÈlÈment
+    if (k < 1) { // Si la position donn√©e est inf√©rieur √† 1, il est impossible d'ins√©rer l'√©l√©ment
         printf("Impossible d'inserer la valeur %d \n", v);
         return L;
     }
-    else if (k == 1) { // L'insertion ‡ la premiËre position
+    else if (k == 1) { // L'insertion √† la premi√®re position
         return insererTete(L, v);
     }
     else {
@@ -127,24 +127,25 @@ liste insererPos(liste L, int v, int k) {
         p->val = v;
         liste q = L;
         int pos = 1; // La position du pointeur "q" dans la liste
-        while ((pos < k - 1) && (q != NULL)) { // Passer ‡ la position "k - 1"
+        while ((pos < k - 1) && (q != NULL)) { // Passer √† la position "k - 1"
             q = q->suiv;
             pos = pos + 1;
         }
-        if (q == NULL) { // Si la position d'insertion est supÈrieure ‡ la taille de la liste + 1
-                         // alors il est impossible d'insÈrer l'ÈlÈment
+        if (q == NULL) { // Si la position d'insertion est sup√©rieure √† la taille de la liste + 1
+                         // alors il est impossible d'ins√©rer l'√©l√©ment
             printf("Impossible d'inserer la valeur %d \n", v);
+            free(p);
             return L;
         }
-        // InsÈrer le neoud rÈfÈrencÈ par "p" entre les ÈlÈment aux positions
-        // "k - 1" et "k" ("k + 1" aprËs insertion)
+        // Ins√©rer le neoud r√©f√©renc√© par "p" entre les √©l√©ment aux positions
+        // "k - 1" et "k" ("k + 1" apr√®s insertion)
         p->suiv = q->suiv;
         q->suiv = p;
         return L;
     }
 }
 
-// Insertion ‡ la position "k" (version rÈcursive)
+// Insertion √† la position "k" (version r√©cursive)
 liste insererPosRec(liste L, int v, int k) {
     if (k < 1) {
         printf("Impossible d'inserer la valeur %d \n", v);
@@ -153,9 +154,9 @@ liste insererPosRec(liste L, int v, int k) {
     else if (k == 1) {
         return insererTete(L, v);
     }
-    else if (L == NULL) { // Si on arrive rÈcursivement ou directement ‡ une situation ou
-                          // il faut insÈrer un ÈlÈment ‡ une position supÈrieure ‡ 1
-                          // dans une liste vide, alors il est impossible d'insÈrer cet ÈlÈment.
+    else if (L == NULL) { // Si on arrive r√©cursivement ou directement √† une situation ou
+                          // il faut ins√©rer un √©l√©ment √† une position sup√©rieure √† 1
+                          // dans une liste vide, alors il est impossible d'ins√©rer cet √©l√©ment.
         printf("Impossible d'inserer la valeur %d \n", v);
         return L;
     }
@@ -166,21 +167,21 @@ liste insererPosRec(liste L, int v, int k) {
     }
 }
 
-// Supprimer le premier ÈlÈment de la liste
+// Supprimer le premier √©l√©ment de la liste
 liste supprimerTete(liste L) {
-    if (L == NULL) { // Si la liste est vide, il n'y a rien ‡ supprimer
+    if (L == NULL) { // Si la liste est vide, il n'y a rien √† supprimer
         printf("La liste est vide, rien a supprimer\n");
         return L;
     }
     else {
-        liste p = L; // Le pointeur "p" est utilisÈ pour libÈrer le premier ÈlÈment de la liste
-        L = L->suiv; // La liste passe au deuxiËme ÈlÈment
-        free(p);     // Le premier ÈlÈment est libÈrÈ
+        liste p = L; // Le pointeur "p" est utilis√© pour lib√©rer le premier √©l√©ment de la liste
+        L = L->suiv; // La liste passe au deuxi√®me √©l√©ment
+        free(p);     // Le premier √©l√©ment est lib√©r√©
         return L;
     }
 }
 
-// Supprimer le dernier ÈlÈment de la liste
+// Supprimer le dernier √©l√©ment de la liste
 liste supprimerQueue(liste L) {
     if (L == NULL) {
         printf("La liste est vide, rien a supprimer\n");
@@ -188,80 +189,80 @@ liste supprimerQueue(liste L) {
     }
     else {
         liste p = L;
-        // Si la liste est vide, on fait la mÍme chose que la suppression au dÈbut
+        // Si la liste est vide, on fait la m√™me chose que la suppression au d√©but
         if (p->suiv == NULL) {
             L = NULL;
             free(p);
             return L;
         }
-        // Sinon, nous allons parcourir la liste jusqu'Á la fin
+        // Sinon, nous allons parcourir la liste jusqu'√ß la fin
         else {
-            liste q = p->suiv; // Le pointeur "q" doit atteindre le dernier ÈlÈment de la liste
-            while (q->suiv != NULL) { // Tant qu'on a pas atteint le dernier ÈlÈment
+            liste q = p->suiv; // Le pointeur "q" doit atteindre le dernier √©l√©ment de la liste
+            while (q->suiv != NULL) { // Tant qu'on a pas atteint le dernier √©l√©ment
                 p = q;                // On fait avancer "p"
                 q = q->suiv;          // et "q"
             }
-            p->suiv = NULL; // Le suivant de l'avant dernier ÈlÈment devient "NULL"
-            free(q);        // Le dernier ÈlÈment est libÈrÈ
+            p->suiv = NULL; // Le suivant de l'avant dernier √©l√©ment devient "NULL"
+            free(q);        // Le dernier √©l√©ment est lib√©r√©
             return L;
         }
     }
 }
 
-// Supprimer le dernier ÈlÈment de la liste (Version RÈcursive)
+// Supprimer le dernier √©l√©ment de la liste (Version R√©cursive)
 liste supprimerQueueRec(liste L) {
-    if (L == NULL) { // Cas ÈlÈmentaire 1 : la liste est vide
+    if (L == NULL) { // Cas √©l√©mentaire 1 : la liste est vide
         printf("La liste est vide, rien a supprimer\n");
         return L;
     }
-    else if (L->suiv == NULL) { // Cas ÈlÈmentaire 2 : la liste contient un seul ÈlÈment
+    else if (L->suiv == NULL) { // Cas √©l√©mentaire 2 : la liste contient un seul √©l√©ment
         liste p = L;
         free(p);
         L = NULL;
         return L;
     }
-    else { // Relation de rÈcurrence
-        // La suppression de la fin de la liste "L" revient ‡ la suppression de la fin de son suivant
+    else { // Relation de r√©currence
+        // La suppression de la fin de la liste "L" revient √† la suppression de la fin de son suivant
         L->suiv = supprimerQueueRec(L->suiv);
         return L;
     }
 }
 
-// Supprimer l'ÈlÈment ‡ la position "k"
+// Supprimer l'√©l√©ment √† la position "k"
 liste supprimerPos(liste L, int k) {
-    if (k < 1) { // Si la position est infÈrieur ‡ "1" il est impossible de supprimer l'ÈlÈment
+    if (k < 1) { // Si la position est inf√©rieur √† "1" il est impossible de supprimer l'√©l√©ment
         printf("Impossible de supprimer de la position %d \n", k);
         return L;
     }
-    else if (L == NULL) { // Si la liste est vide alors rien ‡ supprimer
+    else if (L == NULL) { // Si la liste est vide alors rien √† supprimer
         printf("La liste est vide, rien a supprimer\n");
         return L;
     }
     else {
         liste p = L;
-        if (k == 1) { // Si nous voulons supprimer le premier ÈlÈment
+        if (k == 1) { // Si nous voulons supprimer le premier √©l√©ment
             L = L->suiv;
             free(p);
             return L;
         }
         else {
-            liste q = p->suiv; // Placer "q" sur la deuxiËme position
+            liste q = p->suiv; // Placer "q" sur la deuxi√®me position
             int pos = 2;       // Garder la position de "q" dans cette variable
-            while ((pos < k) && (q != NULL)) { // Passer ‡ l'ÈlÈment suivant jusqu'‡ ce que
-                                               // On atteint la position de l'ÈlÈment ‡ supprimer
+            while ((pos < k) && (q != NULL)) { // Passer √† l'√©l√©ment suivant jusqu'√† ce que
+                                               // On atteint la position de l'√©l√©ment √† supprimer
                                                // Ou "q" est "NULL"
                 p = q;
                 q = q->suiv;
-                pos = pos + 1;                 // IncrÈmenter la position ‡ chaque itÈration
+                pos = pos + 1;                 // Incr√©menter la position √† chaque it√©ration
             }
             if (q != NULL) {                   // Si "q" n'est pas "NULL", supprimer le neoud
-                                               // rÈfÈrencÈ par "q"
-                p->suiv = q->suiv;             // RÈorganiser l'enchainement de la liste
+                                               // r√©f√©renc√© par "q"
+                p->suiv = q->suiv;             // R√©organiser l'enchainement de la liste
                 free(q);
                 return L;
             }
-            else { // Si "q" est "NULL" alors la position de l'ÈlÈment ‡ supprimer est supÈrieure
-                   // ‡ la taille de la liste
+            else { // Si "q" est "NULL" alors la position de l'√©l√©ment √† supprimer est sup√©rieure
+                   // √† la taille de la liste
                 printf("Impossible de supprimer l'element a cette position\n");
                 return L;
             }
@@ -269,21 +270,21 @@ liste supprimerPos(liste L, int k) {
     }
 }
 
-// Supprimer l'ÈlÈment ‡ la position "k" (Version RÈcursive)
+// Supprimer l'√©l√©ment √† la position "k" (Version R√©cursive)
 liste supprimerPosRec(liste L, int k) {
     if (k < 1) { // Impossible de supprimer si "k < 1"
         printf("Impossible de supprimer de la position %d \n", k);
         return L;
     }
-    else if (L == NULL) { // Cas ÈlÈmentaire : Si la liste est vide, rien ‡ supprimer
+    else if (L == NULL) { // Cas √©l√©mentaire : Si la liste est vide, rien √† supprimer
         printf("Impossible de supprimer l'element a cette position\n");
         return L;
     }
-    else if (k == 1) { // Cas ÈlÈmentaire 2 : Si "k == 1" alors supprimer la tÍte
+    else if (k == 1) { // Cas √©l√©mentaire 2 : Si "k == 1" alors supprimer la t√™te
         return supprimerTete(L);
     }
-    else { // Relation de recurrence : Suppression ‡ la position "k" dans la liste "L"
-           // revient ‡ insÈrer ‡ la posirion "k - 1" dans "L->suiv"
+    else { // Relation de recurrence : Suppression √† la position "k" dans la liste "L"
+           // revient √† ins√©rer √† la posirion "k - 1" dans "L->suiv"
         L->suiv = supprimerPosRec(L->suiv, k - 1);
         return L;
     }
